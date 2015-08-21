@@ -8,7 +8,7 @@ Schemas for datasources can change at any time and Druid supports different sche
 ## Replacing Segments
 
 Druid uniquely 
-identifies segments using the datasource, interval, version, and partition number. The partition number is only present if 
+identifies segments using the datasource, interval, version, and partition number. The partition number is only visible in the segment id if 
 there are multiple segments created for some granularity of time. For example, if you have hourly segments, but you 
 have more data in an hour than a single segment can hold, you can create multiple segments for the same hour. These segments will share 
 the same datasource, interval, and version, but have linearly increasing partition numbers.
@@ -19,6 +19,7 @@ foo_2015-01-01/2015-01-02_v1_1
 foo_2015-01-01/2015-01-02_v1_2
 ```
 
+In the example segments above, the dataSource = foo, interval = 2015-01-01/2015-01-02, version = v1, partitionNum = 0. 
 If at some later point in time, you reindex the data with a new schema, the newly created segments will have a higher version id.
 
 ```
@@ -27,11 +28,13 @@ foo_2015-01-01/2015-01-02_v2_1
 foo_2015-01-01/2015-01-02_v2_2
 ```
 
-Druid supports atomically replacing segments on a datasource and granularity level. In our example, once all `v2` segments are 
-loaded and queryable in a Druid cluster, all queries switch to getting data from `v2` segments. If the total set is incomplete, Druid 
-will still query `v1` segments.
+Druid batch indexing (either Hadoop-based or IndexTask-based) guarantees atomic updates on an interval-by-interval basis. 
+In our example, until all `v2` segments for `2015-01-01/2015-01-02` are loaded in a Druid cluster, queries exclusively use `v1` segments. 
+Once all `v2` segments are loaded and queryable, all queries ignore `v1` segments and switch to the `v2` segments. 
+Shortly afterwards, the `v1` segments are unloaded from the cluster.
 
-Note that replacing segments across granularities is eventually consistent. For example, you have segments such as the following:
+Note that updates that span multiple segment intervals are only atomic within each interval. They are not atomic across the entire update. 
+For example, you have segments such as the following:
 
 ```
 foo_2015-01-01/2015-01-02_v1_0
@@ -49,7 +52,6 @@ foo_2015-01-03/2015-01-04_v1_2
 ``` 
  
 In this case, queries may hit a mixture of `v1` and `v2` segments.
-
 
 ## Different Schemas Among Segments
 
