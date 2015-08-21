@@ -52,5 +52,5 @@ Community Helper Libraries
 UIs
 ---
 
-* [grafana](https://github.com/Quantiply/grafana-plugins/tree/master/features/druid_ - A plugin for (Grafana)[http://grafana.org/]
+* [grafana](https://github.com/Quantiply/grafana-plugins/tree/master/features/druid) - A plugin for (Grafana)[http://grafana.org/]
 * [mistercrunch/panoramix](https://github.com/mistercrunch/panoramix) - A web application to slice, dice and visualize data out of Druid
