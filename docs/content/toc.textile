@@ -14,6 +14,7 @@ h2. Data Ingestion
 * "Data Formats":../ingestion/data-formats.html
 * "Data Schema":../ingestion/index.html
 * "Schema Design":../ingestion/schema-design.html
+* "Schema Changes":../ingestion/schema-changes.html
 * "Realtime Ingestion":../ingestion/realtime-ingestion.html
 * "Batch Ingestion":../ingestion/batch-ingestion.html
 * "FAQ":../ingestion/faq.html
