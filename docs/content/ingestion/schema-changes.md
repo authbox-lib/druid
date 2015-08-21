@@ -58,6 +58,5 @@ In this case, queries may hit a mixture of `v1` and `v2` segments.
 Druid segments for the same datasource may have different schemas. If a string column (dimension) exists in one segment but not 
 another, queries that involve both segments still work. Queries for the segment missing the dimension will behave as if the dimension is 
 present and all values are null. Similarly, if one segment has a numeric column (metric) but another does not, queries on the segment missing the 
-metric will behave as if the metric column is present and all values are 0.
-
-
+metric will generally "do the right thing". Aggregations over this missing metric behave as if the metric column is present and all values are 0. 
+Min/max aggregations and sketches will behave as if the metric were missing.

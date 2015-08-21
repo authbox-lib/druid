@@ -9,7 +9,7 @@ volumes of concurrent queries.
 ## Parallelization Model
 
 Druid's fundamental unit of computation is a [segment](../design/segments.html). Nodes scan segments in parallel and a 
-given node can scan `MIN(druid.processing.numThreads, Runtime.getRuntime().availableProcessors())` concurrently. To 
+given node can scan `druid.processing.numThreads` concurrently. To 
 process more data in parallel and increase performance, more cores can be added to a cluster. Druid segments 
 should be sized such that any computation over any given segment should complete in at most 500ms.
 
