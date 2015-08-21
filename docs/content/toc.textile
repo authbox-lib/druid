@@ -60,6 +60,7 @@ h2. Operations
 * "Alerts":../operations/alerts.html
 * "Updating the Cluster":../operations/rolling-updates.html
 * "Different Hadoop Versions":../operations/other-hadoop.html
+* "Multitenancy Considerations":../operations/multitenancy.html
 * "Performance FAQ":../operations/performance-faq.html
 
 h2. Configuration
@@ -73,6 +74,7 @@ h2. Configuration
 * "Simple Cluster Configuration":../configuration/simple-cluster.html
 * "Production Cluster Configuration":../configuration/production-cluster.html
 * "Production Hadoop Configuration":../configuration/hadoop.html
+* "Production Zookeeper Configuration":../configuration/zookeeper.html
 
 h2. Development
 * "Libraries":../development/libraries.html
